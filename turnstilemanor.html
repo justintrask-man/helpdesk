@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Helpdesk Form</title>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 700px;
+      width: 100%;
+    }
+    #form-area {
+      display: none;
+      margin-top: 20px;
+    }
+    iframe {
+      width: 100%;
+      height: 800px;
+      border: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Please Verify You’re Human</h2>
+    <!-- Cloudflare Turnstile widget -->
+    <div class="cf-challenge"
+         data-sitekey="0x4AAAAAAB4ZgmUkdFK057Oo"
+         data-callback="onVerify"></div>
+
+    <!-- Hidden form area (shows only after verification) -->
+    <div id="form-area">
+      <h3>Helpdesk Request Form</h3>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfit6X2aXyK6ZkcR2xKtk4NP9Q1sXFOLHVR-zN56CG3XOxZ9g/viewform?embedded=true">
+        Loading…
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    function onVerify(token) {
+      // Show the form once Turnstile passes
+      document.getElementById("form-area").style.display = "block";
+    }
+  </script>
+</body>
+</html>
