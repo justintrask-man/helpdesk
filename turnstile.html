@@ -44,19 +44,31 @@
          data-sitekey="0x4AAAAAAB4ZgmUkdFK057Oo"
          data-callback="onVerify"></div>
 
-    <!-- Hidden form area (shows only after verification) -->
+    <!-- Hidden Google Form (appears after verification) -->
     <div id="form-area">
       <h3>Helpdesk Request Form</h3>
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfit6X2aXyK6ZkcR2xKtk4NP9Q1sXFOLHVR-zN56CG3XOxZ9g/viewform?embedded=true">
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfit6X2aXyK6ZkcR2xKtk4NP9Q1sXFOLHVR-zN56CG3XOxZ9g/viewform?embedded=true" 
+        width="640" 
+        height="800" 
+        frameborder="0">
         Loading…
       </iframe>
     </div>
+
+    <!-- Hidden audio (stored in same repo) -->
+    <audio id="welcome-audio" src="lizard-button.mp3" preload="auto"></audio>
   </div>
 
   <script>
     function onVerify(token) {
-      // Show the form once Turnstile passes
+      // Show the form
       document.getElementById("form-area").style.display = "block";
+      // Play the audio
+      const audio = document.getElementById("welcome-audio");
+      audio.play().catch(err => {
+        console.log("Autoplay blocked until user interacts:", err);
+      });
     }
   </script>
 </body>
